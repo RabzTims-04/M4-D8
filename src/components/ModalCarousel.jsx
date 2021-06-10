@@ -3,6 +3,7 @@ import { Modal, Button, Row, Col } from 'react-bootstrap'
 import { useState } from 'react'
 import AddComment from './AddComment'
 import CommentList from './CommentList'
+import { withRouter } from 'react-router-dom'
 
 const ModalCarousel =(props)=>{
 
@@ -20,7 +21,7 @@ const [newcomment, setNewComment] = useState([])
         <>
          <img
                  id={props.imdbID}
-                 onClick={handleShow} 
+                 onClick={()=> props.history.push('/details/' + props.imdbID)} 
                  className="imagetransition img-fluid image-height" 
                  src={props.Poster} 
                  alt={props.Title}/>
@@ -54,4 +55,4 @@ const [newcomment, setNewComment] = useState([])
 
 }
 
-export default ModalCarousel
+export default withRouter(ModalCarousel)

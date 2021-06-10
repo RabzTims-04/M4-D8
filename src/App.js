@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap'
 import Header from "./components/Header";
 import Movies from "./components/Movies";
 import MyNav from "./components/MyNav";
+import ShowDetail from './components/ShowDetail'
 
 const App = ()=> {
 
@@ -18,19 +19,23 @@ const App = ()=> {
   return (
     <>
 
+    <Router>
     <MyNav searchValue={newSearch}/>
     <Header/>
     <Container fluid>
-      <Movies id='harry-potter' movieName={search?search:'harry%20potter'} movieTitle={search?search:'Harry Potter'}/>
+    <Route path="/" exact render={(routerProps)=> <Movies {...routerProps} id='harry-potter' movieName={search?search:'harry%20potter'} movieTitle={search?search:'Harry Potter'}/>}/>
       {search?'':
       <>
-      <Movies id='lotr' movieName='Lord+of+the+rings' movieTitle='Lord of the Rings'/>
-      <Movies id='batman' movieName='Batman' movieTitle='Batman'/>
-      <Movies id='avengers' movieName='Avengers' movieTitle='Avengers'/>
+      <Route path="/" exact render={(routerProps)=><Movies {...routerProps} id='lotr' movieName='Lord+of+the+rings' movieTitle='Lord of the Rings'/> }/>
+      <Route path="/" exact render={(routerProps)=> <Movies {...routerProps} id='batman' movieName='Batman' movieTitle='Batman'/> }/>
+      <Route path="/" exact render={(routerProps)=> <Movies {...routerProps} id='avengers' movieName='Avengers' movieTitle='Avengers'/>}/>
       </>
       }
       
-    </Container>  
+    </Container> 
+    <Route path="/details/:movieID" render={(routerProps) => <ShowDetail {...routerProps} title="hello"/>}/>
+    </Router>
+     
     </>
   )
 }

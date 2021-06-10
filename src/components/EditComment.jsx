@@ -62,11 +62,13 @@ class EditComment extends Component{
                     }
                 })
 
-                console.log('put',response);
+                const editcomment= await response.json()
+               
+                console.log('put',await response.json());
 
                 if(response.ok){
-                    alert('koool edit')
-                    this.props.editComment=(await response.json())
+                    /* this.props.editComment=(await response.json()) */
+                   this.props.editComment= editcomment 
                     this.setState({
                         editComment:{
                             comment:'',
