@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
+import { useState } from 'react'
+import { Container } from 'react-bootstrap'
+import Header from "./components/Header";
+import Movies from "./components/Movies";
+import MyNav from "./components/MyNav";
 
-function App() {
+const App = ()=> {
+
+  const [search, setSearch] = useState('')
+
+  const newSearch = (data) =>{
+    setSearch(data)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+
+    <MyNav searchValue={newSearch}/>
+    <Header/>
+    <Container fluid>
+      <Movies id='harry-potter' movieName={search?search:'harry%20potter'} movieTitle={search?search:'Harry Potter'}/>
+      {search?'':
+      <>
+      <Movies id='lotr' movieName='Lord+of+the+rings' movieTitle='Lord of the Rings'/>
+      <Movies id='batman' movieName='Batman' movieTitle='Batman'/>
+      <Movies id='avengers' movieName='Avengers' movieTitle='Avengers'/>
+      </>
+      }
+      
+    </Container>  
+    </>
+  )
 }
 
 export default App;
